@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Docker Containers and You</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -34,8 +34,8 @@
 					<p><a href="https://abuddenb.github.io/docker-presentation">https://abuddenb.github.io/docker-presentation</a></p>
 
 					<div style="font-size: 75%; padding-top: 10px">
-						<p>Andrew Buddenberg @ <a href="https://ncics.org/people/andrew-buddenberg/">CICS-NC</a></p>
-						<p>Jonathan Brannock @ <a href="https://ncics.org/people/jonathan-brannock/">CICS-NC</a></p>
+						<p>Andrew Buddenberg @ <a href="http://ncics.org/people/andrew-buddenberg/">CICS-NC</a></p>
+						<p>Jonathan Brannock @ <a href="http://ncics.org/people/jonathan-brannock/">CICS-NC</a></p>
 					</div>
 
 					<footer>
@@ -48,24 +48,41 @@
 				<section>
 					<section>
 						<h2>What is a container?</h2>
-						<p></p>
+						<p>
+							Containers are self-contained execution environments -- with their own, isolated CPU,
+							memory, block I/O, and network resources -- that share the kernel of the host operating
+							system. The result is something that feels like a virtual machine, but sheds all the weight
+							and startup overhead of a guest operating system.<sup><a href="http://www.infoworld.com/article/3072929/linux/containers-101-linux-containers-and-docker-explained.html" target="_blank">[1]</a></sup>
+						</p>
 					</section>
 
 					<section>
 						<h2>What is Docker?</h2>
-						<p></p>
+						<p>Docker containers wrap a piece of software in a complete filesystem that contains everything
+							needed to run: code, runtime, system tools, system libraries – anything that can be
+							installed on a server. This guarantees that the software will always run the same,
+							regardless of its environment.</p>
+
+						<h4 class="fragment">
+							It's like an apartment for a single application.
+						</h4>
 					</section>
 
 					<section>
 						<h2>What isn't Docker?</h2>
-						<p class="fragment">Is isn't a VM...</p>
-						<p class="fragment">Is isn't <em>really</em> configuration management...</p>
-						<p class="fragment">...but it has properties of both and plays nicely along side.</p>
+						<p class="fragment">It isn't a VM in the conventional sense...</p>
+						<p class="fragment">It isn't <em>really</em> configuration management...</p>
+						<p class="fragment">...but it has properties of both and plays nicely with them.</p>
 					</section>
 
 					<section>
 						<h2>Why would I want to use it?</h2>
-						<p></p>
+						<p><a href="https://www.docker.com/what-docker" target="_blank">Lots</a> of reasons.</p>
+						<ul>
+							<li class="fragment">VMs are hard to spin up and configure correctly.</li>
+							<li class="fragment">You need old or mutually incompatible software.</li>
+							<li class="fragment">You want to stop worrying <em><a href="http://www.lauradhamilton.com/servers-pets-versus-cattle" target="_blank">where</a></em> your software runs.</li>
+						</ul>
 					</section>
 
 					<section data-markdown>
@@ -87,12 +104,45 @@
 				<section>
 					<section>
 						<h2>How to use Docker in development</h2>
-						<ul>
-							<li>Docker commands</li>
-							<li>Dockerfile</li>
-							<li>docker-compose</li>
-							<li>Where to put data?</li>
-						</ul>
+					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+						### Docker commands
+
+						Use docker commands to interact with the Docker Engine:
+
+						```
+							docker images
+						```
+
+						```
+							docker run hello-world
+						```
+
+						```
+							docker run -it --rm --name my-running-script \
+							-v "$PWD":/usr/src/myapp \
+							-w /usr/src/myapp \
+							python:3 python your-daemon-or-script.py
+						```
+						</script>
+					</section>
+
+					<section>
+						<h2>Dockerfile</h2>
+						<p>A simple text file to define an image.</p>
+					</section>
+
+					<section>
+						<h2>docker-compose.yml</h2>
+						<p>Another simple text file to orchestrate multiple-container applications.</p>
+					</section>
+
+					<section>
+						<h2>Where does the data go?</h2>
+						<p>By default, in magic directories called volumes.</p>
+						<p class="fragment">In practice, <a href="https://docs.docker.com/engine/tutorials/dockervolumes/" target="_blank">where ever is convenient.</a></p>
 					</section>
 				</section>
 
@@ -102,8 +152,8 @@
 						<ul>
 							<li>Security</li>
 							<li>DevOps</li>
-							<li>Registries</li>
 							<li>Docker Swarm</li>
+							<li>Registries</li>
 						</ul>
 					</section>
 				</section>
