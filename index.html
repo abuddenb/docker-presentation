@@ -132,6 +132,22 @@
 					<section>
 						<h2>Dockerfile</h2>
 						<p>A simple text file to define an image.</p>
+						<section data-markdown>
+						<script type="text/template">
+						```
+							FROM ubuntu:latest
+							RUN apt-get -y update && apt-get install -y curl python \
+							&& rm -rf /var/lib/apt/lists/*
+							ENV PATH=/Project/bin:$PATH DISPLAY=:99
+							WORKDIR /Project
+							COPY ["app.cfg", "/etc/app.cfg"]
+							COPY ["id_rsa", "id_rsa.pub", "/Project/.ssh/"]
+							COPY ["jss-ca.pem", "*.py", "*.sh", "*.json", "/Project/"]
+							CMD ["/Project/cmd.sh"]
+						```
+						</script>
+					</section>
+
 					</section>
 
 					<section>
@@ -149,11 +165,42 @@
 				<section>
 					<section>
 						<h2>How to use Docker in operations</h2>
+					</section>
+					<section>
+						<h2>Security</h2>
+						<p>Docker containers are, by default, quite secure.</p>
+						<p class="fragment">But you can fix that.</p>
 						<ul>
-							<li>Security</li>
-							<li>DevOps</li>
-							<li>Docker Swarm</li>
-							<li>Registries</li>
+							<li class="fragment">Docker Files / Inspections</li>
+							<li class="fragment">Kernel Cgroups, namespaces, Networking</li>
+							<li class="fragment">Volumes</li>
+							<li class="fragment">Networking</li>
+							<li class="fragment">Flexible Logging</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Dev Ops</h2>
+						<ul>
+							<li class="fragment">Clear division of environments</li>
+							<li class="fragment">Easily communicated requirements</li>
+							<li class="fragment">Many orchestration options</li>
+							<li class="fragment">Streamlined workflow / continuous integration</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Registries</h2>
+						<p>Provide a central repository of images.</p>
+					</section>
+
+					<section>
+						<h2>Docker Swarm</h2>
+							<ul>
+							<li class="fragment">Distributable scalable workloads</li>
+							<li class="fragment">Resiliency</li>
+							<li class="fragment">Simplified secure networking and load balancing</li>
+							<li class="fragment">Indifferent to execution environment / location</li>
 						</ul>
 					</section>
 				</section>
